@@ -6,5 +6,3 @@ class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
 
-def home(request):
-    pass
