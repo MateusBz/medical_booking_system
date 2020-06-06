@@ -10,14 +10,14 @@ class PatientSignUpForm(UserCreationForm):
     surname = forms.CharField(max_length=100, label='Nazwisko')
     pesel_number = forms.IntegerField(label='Numer PESEL')
     phone = forms.IntegerField(label='Telefon')
-    age = forms.IntegerField(label='Wiek')
+    age = forms.IntegerField(label='Wiek', )
     day_of_birth = forms.DateField(label='Data Urodzenia')
     GENDER = (
         ('M', 'Mężczyzna'),
         ('W', 'Kobieta'),
         ('NN', 'Odmowa'),
     )
-    gender = forms.ChoiceField(choices=GENDER, label='Þłeć')
+    gender = forms.ChoiceField(choices=GENDER, label='Płeć')
     street = forms.CharField(label='Ulica')
     house_number = forms.CharField(label='Numer domu')
     flat_number = forms.CharField(label='Numer mieszkania')
@@ -26,6 +26,13 @@ class PatientSignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
+
+    def __init__(self, *args, **kwargs):
+        super(PatientSignUpForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
+
 
     @transaction.atomic
     def save(self):
@@ -56,10 +63,11 @@ class DoctorSpecialityForm(forms.Form):
         model = DoctorSpeciality
 
 
-class DoctorCreationForm(UserCreationForm):
+class DoctorSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label='Imię')
     surname = forms.CharField(max_length=150, label='Nazwisko')
     phone = forms.IntegerField(label='Telefon')
+    medical_licence = forms.CharField(max_length=7)
     speciality = forms.ModelMultipleChoiceField(
         queryset=DoctorSpeciality.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -68,6 +76,13 @@ class DoctorCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
+
+    def __init__(self, *args, **kwargs):
+        super(DoctorSignUpForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
+
 
     @transaction.atomic
     def save(self):
@@ -78,6 +93,7 @@ class DoctorCreationForm(UserCreationForm):
         doctor.first_name = self.cleaned_data.get('first_name')
         doctor.surname = self.cleaned_data.get('surname')
         doctor.phone = self.cleaned_data.get('phone')
+        doctor.medical_licence = self.cleaned_data.get('medical_licence')
         doctor.speciality.add(*self.cleaned_data.get('speciality'))
         return user
 
