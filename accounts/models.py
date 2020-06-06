@@ -47,3 +47,6 @@ class Doctor(models.Model):
     medical_licence = models.CharField(max_length=7)
     is_active = models.BooleanField(default=False)
     speciality = models.ManyToManyField(DoctorSpeciality)
+
+    
+        
