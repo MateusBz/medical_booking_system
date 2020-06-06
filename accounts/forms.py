@@ -21,7 +21,7 @@ class PatientSignUpForm(UserCreationForm):
     gender = forms.ChoiceField(choices=GENDER, label='Płeć')
     street = forms.CharField(label='Ulica')
     house_number = forms.CharField(label='Numer domu')
-    flat_number = forms.CharField(label='Numer mieszkania')
+    flat_number = forms.CharField(label='Numer mieszkania', required=False)
     zip_code = forms.CharField(label='Kod pocztowy')
     city = forms.CharField(label='Miasto')
 
