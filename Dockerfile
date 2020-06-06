@@ -1,4 +1,3 @@
-# Pull base image
 FROM python:3.6.9
 
 # Set environment variables
@@ -13,4 +12,4 @@ COPY Pipfile Pipfile.lock /home/mateusz/django_projects/medical_booking_system/
 RUN pip install pipenv && pipenv install --system
 
 # Copy project
-COPY . /home/mateusz/django_projects/medical_booking_system
+COPY . /home/mateusz/django_projects/medical_booking_system/
