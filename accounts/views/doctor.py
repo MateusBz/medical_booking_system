@@ -1,10 +1,9 @@
-from django.contrib.auth import login
 from django.shortcuts import redirect
-from django.views.generic import CreateView
-from django.http import HttpResponse
+from django.views.generic import CreateView, DetailView
+
 
 from ..forms import DoctorSignUpForm
-from ..models import CustomUser
+from ..models import CustomUser, Doctor
 
 
 class DoctorSignUpView(CreateView):
@@ -19,3 +18,9 @@ class DoctorSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         return redirect('login')
+
+
+class DoctorDetailView(DetailView):
+    model = Doctor
+    context_object_name = 'doctor'
+    template_name = 'accounts/doctor_detail.html'
