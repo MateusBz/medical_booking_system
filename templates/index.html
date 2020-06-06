@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<div>
-    <h3>Pierwsze logowanie, przejdź do rejestracji</h3>
-    <a href="{% url 'signup'%} ">Rejestracja noweg użytkownika</a>
-</div>
+    {% if user.is_authenticated %}
+        Hello {{ user.username }}
+    {% endif %}
 
 {% endblock page_content %}

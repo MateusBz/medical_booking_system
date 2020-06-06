@@ -1,2 +1,14 @@
-<a href="{% url 'patient_signup' %}">Konto Pacjenta</a>
-<a href="{% url 'doctor_signup' %}">Konto Lekarza</a>
+{% extends 'base.html' %}
+
+{% block page_content%}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <a href="{% url 'patient_signup' %}">Konto Pacjenta</a>
+    </div>
+    <div class="col-md-4">
+        <a href="{% url 'doctor_signup' %}">Konto Lekarza</a>
+        </div>
+    </div>
+    
+
+{% endblock page_content %}
