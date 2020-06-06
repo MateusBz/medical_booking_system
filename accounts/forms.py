@@ -10,8 +10,9 @@ class PatientSignUpForm(UserCreationForm):
     surname = forms.CharField(max_length=100, label='Nazwisko')
     pesel_number = forms.IntegerField(label='Numer PESEL')
     phone = forms.IntegerField(label='Telefon')
-    age = forms.IntegerField(label='Wiek', )
-    day_of_birth = forms.DateField(label='Data Urodzenia')
+    age = forms.IntegerField(label='Wiek')
+    day_of_birth = forms.DateField(
+        label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}))
     GENDER = (
         ('M', 'Mężczyzna'),
         ('W', 'Kobieta'),
@@ -67,7 +68,7 @@ class DoctorSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label='Imię')
     surname = forms.CharField(max_length=150, label='Nazwisko')
     phone = forms.IntegerField(label='Telefon')
-    medical_licence = forms.CharField(max_length=7)
+    medical_licence = forms.CharField(max_length=7, label='PWZ')
     speciality = forms.ModelMultipleChoiceField(
         queryset=DoctorSpeciality.objects.all(),
         widget=forms.CheckboxSelectMultiple,
