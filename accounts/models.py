@@ -48,5 +48,6 @@ class Doctor(models.Model):
     is_active = models.BooleanField(default=False)
     speciality = models.ManyToManyField(DoctorSpeciality)
 
-    
+    def __str__(self):
+        return self.first_name + ' ' + self.surname
         

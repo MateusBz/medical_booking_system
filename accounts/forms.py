@@ -79,10 +79,9 @@ class DoctorSignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(DoctorSignUpForm, self).__init__(*args, **kwargs)
-
+        
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
-
 
     @transaction.atomic
     def save(self):
@@ -95,5 +94,6 @@ class DoctorSignUpForm(UserCreationForm):
         doctor.phone = self.cleaned_data.get('phone')
         doctor.medical_licence = self.cleaned_data.get('medical_licence')
         doctor.speciality.add(*self.cleaned_data.get('speciality'))
+        doctor.save()
         return user
 
