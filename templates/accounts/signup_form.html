@@ -3,9 +3,9 @@
 {% load crispy_forms_tags %}
 
 {% block page_content %}
-<div class="row">
+<div class="row" style="margin-top: 2rem;">
     <div class="col-md-4 offset-md-1">
-        <h3>Sign Up as a {{ user_type }}.</h3>
+        <h4>Sign Up as a {{ user_type }}.</h4>
         <form action="" method="post">
             {% csrf_token %}
             {{ form|crispy }}
