@@ -28,6 +28,9 @@ class Patient(models.Model):
     zip_code = models.CharField(max_length=6)
     city = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.first_name + ' ' + self.surname
+        
 
 class DoctorSpeciality(models.Model):
     name = models.CharField(max_length=100)
@@ -44,3 +47,6 @@ class Doctor(models.Model):
     medical_licence = models.CharField(max_length=7)
     is_active = models.BooleanField(default=False)
     speciality = models.ManyToManyField(DoctorSpeciality)
+
+    
+        
