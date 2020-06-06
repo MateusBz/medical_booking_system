@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <div>
+        <p>Użytkownik: {{user.username}}</p>
+        <p>Imie: {{patient.first_name }}</p>
+        <p>Nazwisko: {{ patient.surname }}</p>
+        <p>PESEL: {{ patient.pesel_number }}</p>
+        <p>Telefon: {{ patient.phone }}</p>
+        <p>Wiek: {{ patient.age }}</p>
+        <p>Data urodzenia: {{patient.day_of_birth}}</p>
+        {% if patient.gender == 'W'%}
+            <p>Płeć: Kobieta</p>
+        {% elif patient.gender == 'M'%}
+            <p>Þłeć: Mężczyzna</p>
+        {% else %}
+            <p>Płeć: Odmowa</p>
+        {% endif%}
+        <hr>
+        <p>Adres:</p>
+        <p>Ulica: {{patient.street}}</p>
+        <p>Numer domu: {{patient.house_number}}</p>
+        <p>Numer mieszkania: {{patient.flat_number}}</p>
+        <p>Kod pocztowy: {{patient.zip_code}}</p>
+        <p>Miasto: {{patient.city}}</p>
+
+    </div>
+{% endblock page_content%}
+
+
+
+
+user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+first_name = models.CharField(max_length=100)
+surname = models.CharField(max_length=150)
+pesel_number = models.CharField(max_length=11)
+phone = models.CharField(max_length=20)
+age = models.IntegerField(blank=True, null=True)
+day_of_birth = models.DateTimeField(blank=True, null=True)
+GENDER = (
+('M', 'Mężczyzna'),
+('W', 'Kobieta'),
+('NN', 'Odmowa'),
+)
+gender = models.CharField(max_length=2, choices=GENDER)
+street = models.CharField(max_length=100)
+house_number = models.CharField(max_length=10)
+flat_number = models.CharField(max_length=10, blank=True, null=True)
+zip_code = models.CharField(max_length=6)
+city = models.CharField(max_length=100)
