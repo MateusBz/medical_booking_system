@@ -84,7 +84,7 @@ DATABASES = {
     #     'NAME': 'sqlite3.db',
     # }
     'default': dj_database_url.config('DATABASE_URL')
-    )
+    
 }
 
 
