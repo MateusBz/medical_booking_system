@@ -9,9 +9,8 @@ class PatientSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label='Imię')
     surname = forms.CharField(max_length=100, label='Nazwisko')
     email = forms.EmailField(label='Email')
-    pesel_number = forms.IntegerField(label='Numer PESEL')
+    pesel_number = forms.IntegerField(label='Numer PESEL',)
     phone = forms.IntegerField(label='Telefon')
-    age = forms.IntegerField(label='Wiek')
     day_of_birth = forms.DateField(
         label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}))
     GENDER = (
@@ -35,6 +34,7 @@ class PatientSignUpForm(UserCreationForm):
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
+    
 
     @transaction.atomic
     def save(self):
@@ -46,7 +46,6 @@ class PatientSignUpForm(UserCreationForm):
         patient.surname = self.cleaned_data.get('surname')
         patient.pesel_number = self.cleaned_data.get('pesel_number')
         patient.phone = self.cleaned_data.get('phone')
-        patient.age = self.cleaned_data.get('age')
         patient.day_of_birth = self.cleaned_data.get('day_of_birth')
         patient.gender = self.cleaned_data.get('gender')
         patient.street = self.cleaned_data.get('street')

@@ -7,7 +7,7 @@
         <p>Nazwisko: {{ patient.surname }}</p>
         <p>PESEL: {{ patient.pesel_number }}</p>
         <p>Telefon: {{ patient.phone }}</p>
-        <p>Wiek: {{ patient.age }}</p>
+        <p>Wiek: {{ patient.compute_age }}</p>
         <p>Data urodzenia: {{patient.day_of_birth}}</p>
         {% if patient.gender == 'W'%}
             <p>Płeć: Kobieta</p>

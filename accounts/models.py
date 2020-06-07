@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 from django.contrib.auth.models import AbstractUser
@@ -15,8 +16,7 @@ class Patient(models.Model):
     email = models.CharField(max_length=150)
     pesel_number = models.CharField(max_length=11)
     phone = models.CharField(max_length=20)
-    age = models.IntegerField(blank=True, null=True)
-    day_of_birth = models.DateTimeField(blank=True, null=True)
+    day_of_birth = models.DateField(blank=True, null=True)
     GENDER = (
         ('M', 'Mężczyzna'),
         ('W', 'Kobieta'),
@@ -31,7 +31,11 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.first_name + ' ' + self.surname
-        
+
+    @property
+    def compute_age(self):
+        return int((datetime.now().date() - self.day_of_birth).days / 365.25)
+
 
 class DoctorSpeciality(models.Model):
     name = models.CharField(max_length=100)
