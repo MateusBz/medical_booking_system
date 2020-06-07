@@ -9,8 +9,8 @@ class PatientSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label='Imię')
     surname = forms.CharField(max_length=100, label='Nazwisko')
     email = forms.EmailField(label='Email')
-    pesel_number = forms.IntegerField(label='Numer PESEL',)
-    phone = forms.IntegerField(label='Telefon')
+    pesel_number =forms.CharField(label='Numer PESEL', max_length=11, widget=forms.NumberInput())
+    phone=forms.IntegerField(label='Telefon')
     day_of_birth = forms.DateField(
         label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}))
     GENDER = (
@@ -23,18 +23,17 @@ class PatientSignUpForm(UserCreationForm):
     house_number = forms.CharField(label='Numer domu')
     flat_number = forms.CharField(label='Numer mieszkania', required=False)
     zip_code = forms.CharField(label='Kod pocztowy')
-    city = forms.CharField(label='Miasto')
+    city=forms.CharField(label = 'Miasto')
 
     class Meta(UserCreationForm.Meta):
-        model = CustomUser
+        model=CustomUser
 
     def __init__(self, *args, **kwargs):
         super(PatientSignUpForm, self).__init__(*args, **kwargs)
 
         for fieldname in ['username', 'password1', 'password2']:
-            self.fields[fieldname].help_text = None
+            self.fields[fieldname].help_text=None
 
-    
 
     @transaction.atomic
     def save(self):
@@ -69,7 +68,8 @@ class DoctorSignUpForm(UserCreationForm):
     surname = forms.CharField(max_length=150, label='Nazwisko')
     email = forms.EmailField(label='Email')
     phone = forms.IntegerField(label='Telefon')
-    medical_licence = forms.CharField(max_length=7, label='PWZ')
+    medical_licence = forms.CharField(
+        max_length=7, label='PWZ', widget=forms.NumberInput())
     speciality = forms.ModelMultipleChoiceField(
         queryset=DoctorSpeciality.objects.all(),
         widget=forms.CheckboxSelectMultiple,

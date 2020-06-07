@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.db import models
-
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
 
@@ -14,7 +14,7 @@ class Patient(models.Model):
     first_name = models.CharField(max_length=100)
     surname = models.CharField(max_length=150)
     email = models.CharField(max_length=150)
-    pesel_number = models.CharField(max_length=11)
+    pesel_number = models.CharField(max_length=11, validators=[RegexValidator(r'^\d{1,10}$')])
     phone = models.CharField(max_length=20)
     day_of_birth = models.DateField(blank=True, null=True)
     GENDER = (
