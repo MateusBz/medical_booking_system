@@ -28,23 +28,3 @@
 {% endblock page_content%}
 
 
-
-
-user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-first_name = models.CharField(max_length=100)
-surname = models.CharField(max_length=150)
-pesel_number = models.CharField(max_length=11)
-phone = models.CharField(max_length=20)
-age = models.IntegerField(blank=True, null=True)
-day_of_birth = models.DateTimeField(blank=True, null=True)
-GENDER = (
-('M', 'Mężczyzna'),
-('W', 'Kobieta'),
-('NN', 'Odmowa'),
-)
-gender = models.CharField(max_length=2, choices=GENDER)
-street = models.CharField(max_length=100)
-house_number = models.CharField(max_length=10)
-flat_number = models.CharField(max_length=10, blank=True, null=True)
-zip_code = models.CharField(max_length=6)
-city = models.CharField(max_length=100)
