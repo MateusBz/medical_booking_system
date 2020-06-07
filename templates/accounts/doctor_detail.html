@@ -2,8 +2,17 @@
 
 {% block page_content %}
 <div>
-    {% for item in doctor%}
-        {{item}}
+    <p>Użytkownik: {{ user.username }}</p>
+    <p>Imię: {{ doctor.first_name }}</p>
+    <p>Nazwisko: {{doctor.surname }}</p>
+    <p>Email: {{ doctor.email }}</p>
+    <p>Telefon: {{ doctor.phone }}</p>
+    <p>PWZ: {{ doctor.medical_licence }}</p>
+    {% if  not doctor.is_active %}
+        <p>Konto nieaktywne. Brak potwierdzonego PWZ.</p>
+    {% endif%}
+    {% for sp in doctor.speciality.all %}
+        <p>Specjalizacja: {{ sp }}</p>
     {% endfor%}
 </div>
 {% endblock page_content%}

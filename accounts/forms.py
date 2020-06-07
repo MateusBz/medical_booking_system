@@ -94,6 +94,7 @@ class DoctorSignUpForm(UserCreationForm):
         doctor = Doctor.objects.create(user=user)
         doctor.first_name = self.cleaned_data.get('first_name')
         doctor.surname = self.cleaned_data.get('surname')
+        doctor.email = self.cleaned_data('email')
         doctor.phone = self.cleaned_data.get('phone')
         doctor.medical_licence = self.cleaned_data.get('medical_licence')
         doctor.speciality.add(*self.cleaned_data.get('speciality'))
