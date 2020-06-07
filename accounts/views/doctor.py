@@ -24,3 +24,4 @@ class DoctorDetailView(DetailView):
     model = Doctor
     context_object_name = 'doctor'
     template_name = 'accounts/doctor_detail.html'
+
