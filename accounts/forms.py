@@ -8,6 +8,7 @@ from .models import Patient, Doctor, DoctorSpeciality, CustomUser
 class PatientSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label='Imię')
     surname = forms.CharField(max_length=100, label='Nazwisko')
+    email = forms.EmailField(label='Email')
     pesel_number = forms.IntegerField(label='Numer PESEL')
     phone = forms.IntegerField(label='Telefon')
     age = forms.IntegerField(label='Wiek')
@@ -67,6 +68,7 @@ class DoctorSpecialityForm(forms.Form):
 class DoctorSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, label='Imię')
     surname = forms.CharField(max_length=150, label='Nazwisko')
+    email = forms.EmailField(label='Email')
     phone = forms.IntegerField(label='Telefon')
     medical_licence = forms.CharField(max_length=7, label='PWZ')
     speciality = forms.ModelMultipleChoiceField(
