@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    {% for doctor in doctor_list %}
+        <p>{{doctor}} <a href="">Terminarz</a></p>
+        {% for sp in doctor.speciality.all %}
+        <p>Specjalizacja: {{ sp }}</p>
+        {% endfor%}
+    {% endfor %}
+{% endblock page_content%}

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 
 from ..forms import DoctorSignUpForm
@@ -26,5 +26,9 @@ class DoctorDetailView(DetailView):
     template_name = 'accounts/doctor_detail.html'
 
     
-        
+class DoctorListView(ListView):
+    model = Doctor
+    context_object_name = 'doctor_list'
+    template_name = 'accounts/doctor_list.html'
+         
     
