@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import date
+from phonenumber_field.modelfields import PhoneNumberField
 from django.db import models
-from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser
 
 
@@ -11,11 +11,11 @@ class CustomUser(AbstractUser):
 
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-    first_name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=150)
-    email = models.CharField(max_length=150)
-    pesel_number = models.CharField(max_length=11, validators=[RegexValidator(r'^\d{1,10}$')])
-    phone = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=80)
+    surname = models.CharField(max_length=80)
+    email = models.EmailField(max_length=100)
+    pesel_number = models.CharField(max_length=11)
+    phone = PhoneNumberField(max_length=15)
     day_of_birth = models.DateField(blank=True, null=True)
     GENDER = (
         ('M', 'Mężczyzna'),
@@ -34,7 +34,7 @@ class Patient(models.Model):
 
     @property
     def compute_age(self):
-        return int((datetime.now().date() - self.day_of_birth).days / 365.25)
+        return int((date.today() - self.day_of_birth).days / 365.25)
 
 
 class DoctorSpeciality(models.Model):
@@ -46,10 +46,10 @@ class DoctorSpeciality(models.Model):
 
 class Doctor(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
-    first_name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=150)
-    email = models.CharField(max_length=150)
-    phone = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=80)
+    surname = models.CharField(max_length=80)
+    email = models.CharField(max_length=100)
+    phone = PhoneNumberField(max_length=15)
     medical_licence = models.CharField(max_length=7)
     is_active = models.BooleanField(default=False)
     speciality = models.ManyToManyField(DoctorSpeciality)

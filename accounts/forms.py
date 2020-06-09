@@ -1,4 +1,5 @@
 from django import forms
+from phonenumber_field.formfields import PhoneNumberField
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
@@ -6,11 +7,11 @@ from .models import Patient, Doctor, DoctorSpeciality, CustomUser
 
 
 class PatientSignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=100, label='Imię')
-    surname = forms.CharField(max_length=100, label='Nazwisko')
-    email = forms.EmailField(label='Email')
-    pesel_number =forms.CharField(label='Numer PESEL', max_length=11, widget=forms.NumberInput())
-    phone=forms.IntegerField(label='Telefon')
+    first_name = forms.CharField(max_length=80, label='Imię')
+    surname = forms.CharField(max_length=80, label='Nazwisko')
+    email = forms.EmailField(label='Email', max_length=100)
+    pesel_number = forms.CharField(label='Numer PESEL', widget= forms.TextInput(attrs={'pattern': '\d*', 'maxlength': 11}))
+    phone = PhoneNumberField(label='Telefon', max_length=15)
     day_of_birth = forms.DateField(
         label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}))
     GENDER = (
@@ -64,12 +65,12 @@ class DoctorSpecialityForm(forms.Form):
 
 
 class DoctorSignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=100, label='Imię')
-    surname = forms.CharField(max_length=150, label='Nazwisko')
-    email = forms.EmailField(label='Email')
-    phone = forms.IntegerField(label='Telefon')
-    medical_licence = forms.CharField(
-        max_length=7, label='PWZ', widget=forms.NumberInput())
+    first_name = forms.CharField(max_length=80, label='Imię')
+    surname = forms.CharField(max_length=80, label='Nazwisko')
+    email = forms.EmailField(label='Email', max_length=100)
+    phone = PhoneNumberField(label='Telefon', max_length=15)
+    medical_licence = forms.CharField(label='PWZ', widget=forms.TextInput(
+        attrs={'pattern': '\d*', 'maxlength': 7}))
     speciality = forms.ModelMultipleChoiceField(
         queryset=DoctorSpeciality.objects.all(),
         widget=forms.CheckboxSelectMultiple,
