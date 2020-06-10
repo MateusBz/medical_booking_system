@@ -34,7 +34,9 @@ class Patient(models.Model):
 
     @property
     def compute_age(self):
-        return int((date.today() - self.day_of_birth).days / 365.25)
+        today = date.today()
+        return (today.year - self.day_of_birth.year)
+        
 
 
 class DoctorSpeciality(models.Model):
