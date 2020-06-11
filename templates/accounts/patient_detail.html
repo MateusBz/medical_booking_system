@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <div>
+        <p>Użytkownik: {{user.username}}</p>
+        <p>Imie: {{patient.first_name }}</p>
+        <p>Nazwisko: {{ patient.surname }}</p>
+        <p>PESEL: {{ patient.pesel_number }}</p>
+        <p>Telefon: {{ patient.phone }}</p>
+        <p>Wiek: {{ patient.compute_age }}</p>
+        <p>Data urodzenia: {{patient.day_of_birth}}</p>
+        {% if patient.gender == 'W'%}
+            <p>Płeć: Kobieta</p>
+        {% elif patient.gender == 'M'%}
+            <p>Þłeć: Mężczyzna</p>
+        {% else %}
+            <p>Płeć: Odmowa</p>
+        {% endif%}
+        <hr>
+        <p>Adres:</p>
+        <p>Ulica: {{patient.street}}</p>
+        <p>Numer domu: {{patient.house_number}}</p>
+        <p>Numer mieszkania: {{patient.flat_number}}</p>
+        <p>Kod pocztowy: {{patient.zip_code}}</p>
+        <p>Miasto: {{patient.city}}</p>
+
+    </div>
+{% endblock page_content%}
+
+

@@ -1,0 +1,1 @@
+web: gunicorn medical_booking_system.wsgi --log-file -

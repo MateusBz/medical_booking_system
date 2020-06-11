@@ -2,9 +2,9 @@ version: '3.7'
 services:
     web:
         build: .
-        command: python /home/mateusz/django_projects/mbs/manage.py runserver 0.0.0.0:8000
+        command: python /home/mateusz/django_projects/medical_booking_system/manage.py runserver 0.0.0.0:8000
         volumes:
-            - .:/home/mateusz/django_projects/mbs
+            - .:/home/mateusz/django_projects/medical_booking_system
         ports:
             - 8000:8000
         depends_on:

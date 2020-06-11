@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_patient %}
+        Witaj pacjencie {{ user.username }}!
+        {% else %}
+        Witaj lekarzu {{ user.username }}
+        {% endif %}
+    {% endif %}
+
+{% endblock page_content %}

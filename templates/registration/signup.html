@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block page_content%}
+<div class="row" style='margin-top: 1rem;'>
+    <div class="mx-auto">
+        <h3>Wybierz rodzaj konta do rejestracji:</h3>
+    </div>
+</div>
+<div class="row" style='margin-top: 1rem;'>
+    <div class="col-md-3 offset-md-3">
+        <a class="btn btn-primary btn-block" href="{% url 'patient_signup' %}" style="padding: 0.5rem; margin: auto;">Konto Pacjenta</a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-primary btn-block" href="{% url 'doctor_signup' %}" style="padding: 0.5rem; margin: auto;">Konto Lekarza</a>
+    </div>
+    </div>
+</div>
+    
+    
+
+{% endblock page_content %}
