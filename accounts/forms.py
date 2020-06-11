@@ -9,22 +9,22 @@ from .models import Patient, Doctor, DoctorSpeciality, CustomUser
 class PatientSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=80, label='Imię')
     surname = forms.CharField(max_length=80, label='Nazwisko')
-    email = forms.EmailField(label='Email', max_length=100)
+    email = forms.EmailField(label='Email', max_length=80)
     pesel_number = forms.CharField(label='Numer PESEL', widget= forms.TextInput(attrs={'pattern': '\d*', 'maxlength': 11}))
     phone = PhoneNumberField(label='Telefon', max_length=15)
     day_of_birth = forms.DateField(
-        label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}))
+        label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}),  error_messages={'invalid': 'Niepoprawna nazwa'})
     GENDER = (
         ('M', 'Mężczyzna'),
         ('W', 'Kobieta'),
         ('NN', 'Odmowa'),
     )
     gender = forms.ChoiceField(choices=GENDER, label='Płeć')
-    street = forms.CharField(label='Ulica')
-    house_number = forms.CharField(label='Numer domu')
-    flat_number = forms.CharField(label='Numer mieszkania', required=False)
-    zip_code = forms.CharField(label='Kod pocztowy')
-    city=forms.CharField(label = 'Miasto')
+    street = forms.CharField(label='Ulica', max_length=80)
+    house_number = forms.CharField(label='Numer domu', max_length=10)
+    flat_number = forms.CharField(label='Numer mieszkania', required=False, max_length=10)
+    zip_code = forms.CharField(label='Kod pocztowy', max_length=6)
+    city=forms.CharField(label = 'Miasto', max_length=80)
 
     class Meta(UserCreationForm.Meta):
         model=CustomUser
@@ -34,6 +34,12 @@ class PatientSignUpForm(UserCreationForm):
 
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text=None
+        
+        self.fields['username'].label = 'Nazwa użytkownika'
+        self.fields['password1'].label = 'Hasło'
+        self.fields['password2'].label = 'Potwierdź hasło'
+
+        
 
 
     @transaction.atomic
@@ -58,7 +64,7 @@ class PatientSignUpForm(UserCreationForm):
 
 
 class DoctorSpecialityForm(forms.Form):
-    speciality = forms.CharField(max_length=150)
+    speciality = forms.CharField(max_length=100)
 
     class Meta:
         model = DoctorSpeciality
@@ -67,7 +73,7 @@ class DoctorSpecialityForm(forms.Form):
 class DoctorSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=80, label='Imię')
     surname = forms.CharField(max_length=80, label='Nazwisko')
-    email = forms.EmailField(label='Email', max_length=100)
+    email = forms.EmailField(label='Email', max_length=80)
     phone = PhoneNumberField(label='Telefon', max_length=15)
     medical_licence = forms.CharField(label='PWZ', widget=forms.TextInput(
         attrs={'pattern': '\d*', 'maxlength': 7}))
@@ -85,6 +91,10 @@ class DoctorSignUpForm(UserCreationForm):
         
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
+        
+        self.fields['username'].label = 'Nazwa użytkownika'
+        self.fields['password1'].label = 'Hasło'
+        self.fields['password2'].label = 'Potwierdź hasło'
 
     @transaction.atomic
     def save(self):
