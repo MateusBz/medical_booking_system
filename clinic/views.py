@@ -1,11 +1,28 @@
-from django.views.generic import ListView
-from .models import Office
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, DetailView, ListView
+from django.shortcuts import redirect
+from .models import Visit
+from .forms import VisitCreateForm
 
-class OfficeListView(ListView):
-    model = Office
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["offices"] = Office.objects.filter(occupied=False)
-        return context
-    
+
+class VisitCreateView(LoginRequiredMixin, CreateView):
+    model = Visit
+    form_class = VisitCreateForm
+    template_name = 'clinic/visit_creation.html'
+    login_url = 'login'
+
+    def form_valid(self, form):
+        form.instance.patient = self.request.user
+        return super().form_valid(form)
+
+
+class VisitListView(ListView):
+    model = Visit
+    context_object_name = 'visits'
+    template_name = 'clinic/visit_list.html'
+
+
+class VisitDetailView(LoginRequiredMixin, DetailView):
+    model = Visit
+    template_name = 'clinic/visit_detail.html'
+    login_url = 'login'
