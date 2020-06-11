@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    {% for visit in visits %}
+        <p> {{ visit.doctor }}</p>
+        <p>{{ visit.date }} {{ visit.time }}</p>
+        
+        
+    {% endfor %}
+{% endblock page_content%}
