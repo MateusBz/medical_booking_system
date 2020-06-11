@@ -5,7 +5,6 @@
 {% block page_content %}
 <div class="row" style="margin-top: 2rem;">
     <div class="col-md-4 offset-md-1">
-        <h4>Sign Up as a {{ user_type }}.</h4>
         <form action="" method="post">
             {% csrf_token %}
             {{ form|crispy }}
