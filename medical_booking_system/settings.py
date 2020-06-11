@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'clinic.apps.ClinicConfig',
     'accounts.apps.AccountsConfig',
     'whitenoise.runserver_nostatic',
     'phonenumber_field',
