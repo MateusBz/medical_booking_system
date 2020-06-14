@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-    {% for visit in visits %}
-        <p> {{ visit.doctor }}</p>
-        <p>{{ visit.date }} {{ visit.time }}</p>
-        
-        
-    {% endfor %}
+    {% if visits %}
+        {% for visit in visits %}
+            <p> {{ visit.doctor }}</p>
+            <p>{{ visit.date }} {{ visit.time }}</p>
+        {% endfor %}
+    {% else %}
+    <h3>Brak zaplanowanych wizyt. </h3>
+    {% endif %}
 {% endblock page_content%}

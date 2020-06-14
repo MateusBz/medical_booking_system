@@ -18,13 +18,31 @@ class VisitCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class VisitListView(ListView):
+class PatientVisitListView(LoginRequiredMixin, ListView):
     model = Visit
     context_object_name = 'visits'
     template_name = 'clinic/visit_list.html'
+    login_url = 'login'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(PatientVisitListView, self).get_queryset(*args, **kwargs)
+        qs = qs.filter(patient=self.request.user)
+        return qs
+
+
+class DoctorVisitListView(LoginRequiredMixin, ListView):
+    model = Visit
+    context_object_name = 'visits'
+    template_name = 'clinic/visit_list.html'
+    login_url = 'login'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super(DoctorVisitListView, self).get_queryset(*args, **kwargs)
+        doctor = DoctorSchedule.objects.get(doctor=self.request.user.id)
+        qs = qs.filter(doctor=doctor)
+        return qs
 
 
 class VisitDetailView(LoginRequiredMixin, DetailView):
     model = Visit
     template_name = 'clinic/visit_detail.html'
-    login_url = 'login'
