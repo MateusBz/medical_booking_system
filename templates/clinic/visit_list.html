@@ -3,8 +3,19 @@
 {% block page_content %}
     {% if visits %}
         {% for visit in visits %}
-            <p> {{ visit.doctor }}</p>
-            <p>{{ visit.date }} {{ visit.time }}</p>
+            {% if user.is_patient %}
+                <h3>Lekarz</h3>
+                <p> {{ visit.doctor.doctor}}</p>
+            {% else %}
+                <h3>Pacjent</h3>
+                <p>{{ visit.patient.patient }}</p>
+            {% endif %}
+                <h3>Data wizyty</h3>
+                <p>{{ visit.doctor.date|date:"d.m.Y" }} 
+                <h3>Godzina wizyty</h3>
+                {{ visit.doctor.time }}</p>
+                <hr>
+
         {% endfor %}
     {% else %}
     <h3>Brak zaplanowanych wizyt. </h3>
