@@ -20,7 +20,7 @@ from accounts.views import doctor, patient, signup
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
-    path('offices/', include('clinic.urls')),
+    path('clinic/', include('clinic.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', signup.SignUpView.as_view(), name='signup'),
     path('accounts/signup/patient_signup/', patient.PatientSignUpView.as_view(), name='patient_signup'),
