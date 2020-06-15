@@ -2,7 +2,7 @@
 
 {% block page_content %}
     {% for doctor in doctor_list %}
-        <p>{{doctor}} <a href="">Terminarz</a></p>
+        <p>{{doctor}} <a href="{% url 'doctor_visit_list_accessible' %}">Terminarz</a></p>
         {% for sp in doctor.speciality.all %}
         <p>Specjalizacja: {{ sp }}</p>
         {% endfor%}

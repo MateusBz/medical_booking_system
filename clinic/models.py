@@ -11,7 +11,10 @@ class DoctorSchedule(models.Model):
     occupied = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.doctor.surname + ' ' + self.doctor.first_name +' '+ self.date.strftime("%Y-%m-%d") +' '+ self.time
+        sp = ''
+        for x in self.doctor.speciality.all():
+            sp = sp + str(x) + ', '
+        return sp + ' '+ self.doctor.first_name + ' ' + self.doctor.surname +' '+ self.date.strftime("%Y-%m-%d") +' '+ self.time
 
 
 class Visit(models.Model):

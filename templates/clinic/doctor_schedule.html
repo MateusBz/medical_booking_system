@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+        {% for visit in object_list %}
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-success btn-block">{{ visit }}</button>
+            </div>   
+            <div class="col-md-6">
+                 <a href="{% url 'visit_creation' %}" class="btn btn-warning" role='button'>Zarezerwuj wizytę</a>
+            </div>    
+               
+            
+
+        </div>
+        <br>
+        {% endfor %}
+{% endblock page_content %} 
