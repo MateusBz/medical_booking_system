@@ -14,6 +14,7 @@ whitenoise = "*"
 dj-database-url = "*"
 django-localflavor = "*"
 django-phonenumber-field = {extras = ["phonenumbers"],version = "*"}
+coverage = "*"
 
 [requires]
 python_version = "3.6.9"
