@@ -7,11 +7,11 @@ from .models import Patient, Doctor, DoctorSpeciality, CustomUser
 
 
 class PatientSignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=80, label='Imię')
-    surname = forms.CharField(max_length=80, label='Nazwisko')
-    email = forms.EmailField(label='Email', max_length=80)
-    pesel_number = forms.CharField(label='Numer PESEL', widget= forms.TextInput(attrs={'pattern': '\d*', 'maxlength': 11}))
-    phone = PhoneNumberField(label='Telefon', max_length=15)
+    first_name = forms.CharField(max_length=80, label='Imię', min_length=4)
+    surname = forms.CharField(max_length=80, label='Nazwisko', min_length=4)
+    email = forms.EmailField(label='Email', max_length=80, min_length=6)
+    pesel_number = forms.CharField(label='Numer PESEL', widget=forms.TextInput(attrs={'pattern': '\d*', 'maxlength': 11}), min_length=11)
+    phone = PhoneNumberField(label='Telefon', max_length=15, min_length=10)
     day_of_birth = forms.DateField(
         label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}),  error_messages={'invalid': 'Niepoprawna nazwa'})
     GENDER = (
@@ -20,27 +20,23 @@ class PatientSignUpForm(UserCreationForm):
         ('NN', 'Odmowa'),
     )
     gender = forms.ChoiceField(choices=GENDER, label='Płeć')
-    street = forms.CharField(label='Ulica', max_length=80)
-    house_number = forms.CharField(label='Numer domu', max_length=10)
-    flat_number = forms.CharField(label='Numer mieszkania', required=False, max_length=10)
-    zip_code = forms.CharField(label='Kod pocztowy', max_length=6)
-    city=forms.CharField(label = 'Miasto', max_length=80)
+    street = forms.CharField(label='Ulica', max_length=80, min_length=4)
+    house_number = forms.CharField(label='Numer domu', max_length=10, min_length=4)
+    flat_number = forms.CharField(label='Numer mieszkania', required=False, max_length=10, min_length=4)
+    zip_code = forms.CharField(label='Kod pocztowy', max_length=6, min_length=6)
+    city = forms.CharField(label = 'Miasto', max_length=80, min_length=6)
 
     class Meta(UserCreationForm.Meta):
-        model=CustomUser
+        model = CustomUser
 
     def __init__(self, *args, **kwargs):
         super(PatientSignUpForm, self).__init__(*args, **kwargs)
 
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text=None
-        
         self.fields['username'].label = 'Nazwa użytkownika'
         self.fields['password1'].label = 'Hasło'
         self.fields['password2'].label = 'Potwierdź hasło'
-
-        
-
 
     @transaction.atomic
     def save(self):
@@ -71,12 +67,12 @@ class DoctorSpecialityForm(forms.Form):
 
 
 class DoctorSignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=80, label='Imię')
-    surname = forms.CharField(max_length=80, label='Nazwisko')
-    email = forms.EmailField(label='Email', max_length=80)
-    phone = PhoneNumberField(label='Telefon', max_length=15)
+    first_name = forms.CharField(max_length=80, label='Imię', min_length=4)
+    surname = forms.CharField(max_length=80, label='Nazwisko', min_length=4)
+    email = forms.EmailField(label='Email', max_length=80, min_length=6)
+    phone = PhoneNumberField(label='Telefon', max_length=15, min_length=10)
     medical_licence = forms.CharField(label='PWZ', widget=forms.TextInput(
-        attrs={'pattern': '\d*', 'maxlength': 7}))
+        attrs={'pattern': '\d*', 'maxlength': 7}), min_length=7)
     speciality = forms.ModelMultipleChoiceField(
         queryset=DoctorSpeciality.objects.all(),
         widget=forms.CheckboxSelectMultiple,
