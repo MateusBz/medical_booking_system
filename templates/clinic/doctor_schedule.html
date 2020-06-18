@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
+
 {% block page_content %}
-        {% for visit in object_list %}
+<div class="visits">
+     {% for visit in object_list %}
         <div class="row">
-            <div class="col-md-6">
-                <button class="btn btn-success btn-block">{{ visit }}</button>
+            <div class="col-md-6 offset-md-2" >
+                <button class="btn btn-outline-success btn-block disabled">{{ visit }}</button>
             </div>   
-            <div class="col-md-6">
-                 <a href="{% url 'visit_creation' %}" class="btn btn-warning" role='button'>Zarezerwuj wizytę</a>
+            <div class="col-md-4">
+                 <a href="{% url 'visit_creation' %}" class="btn btn-outline-secondary" role='button'>Zarezerwuj wizytę</a>
             </div>    
                
             
@@ -15,4 +17,6 @@
         </div>
         <br>
         {% endfor %}
+</div>
+       
 {% endblock page_content %} 
