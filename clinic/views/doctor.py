@@ -15,7 +15,7 @@ class DoctorVisitListView(LoginRequiredMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         qs = super(DoctorVisitListView, self).get_queryset(*args, **kwargs)
         try:
-            doctor = DoctorSchedule.objects.get(doctor=self.request.user.id)
+            doctor = DoctorSchedule.objects.filter(doctor=self.request.user.id)[:1]
         except DoctorSchedule.DoesNotExist:
             raise Http404('Brak danych')
         qs = qs.filter(doctor=doctor)
