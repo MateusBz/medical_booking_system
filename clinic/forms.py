@@ -11,4 +11,9 @@ class VisitCreateForm(forms.ModelForm):
         model = Visit
         fields = ('doctor',)
 
-   
+
+class DoctorScheduleCreateForm(forms.ModelForm):
+    
+    class Meta:
+        model = DoctorSchedule 
+        fields = ('date', 'time',) 

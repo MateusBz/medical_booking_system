@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
-
 {% block page_content %}
 <div class="visits">
-     {% for visit in object_list %}
-        <div class="row">
-            <div class="col-md-6 offset-md-2" >
-                <button class="btn btn-outline-success btn-block disabled">{{ visit }}</button>
-            </div>   
-            <div class="col-md-4">
-                 <a href="{% url 'visit_creation' %}" class="btn btn-outline-secondary" role='button'>Zarezerwuj wizytę</a>
-            </div>    
-               
-            
-
-        </div>
-        <br>
-        {% endfor %}
+    {% if free_dates%}
+            {% for visit in object_list %}
+                <div class="row">
+                    <div class="col-md-6 offset-md-2" >
+                        <button class="btn btn-outline-success btn-block disabled">{{ visit }}</button>
+                    </div>   
+                    <div class="col-md-4">
+                         <a href="{% url 'visit_creation' %}" class="btn btn-outline-secondary" role='button'>Zarezerwuj wizytę</a>
+                    </div>    
+                </div>
+                <br>
+            {% endfor %}
+    {% else %}
+    <h3>Brak wolnych terminów</h3>
+    {% endif %}
 </div>
        
 {% endblock page_content %} 

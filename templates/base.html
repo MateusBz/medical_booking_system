@@ -38,6 +38,9 @@
                     </li>
                     {% else %}
                     <li>
+                        <a class="nav-link " href="{% url 'doctor_schedule_create' %}">Dodaj wolne terminy</a>
+                    </li>
+                    <li>
                         <a class="nav-link " href="{% url 'doctor_visits_list' %}">Zaplanowane wizyty</a>
                     </li>
                     <li>

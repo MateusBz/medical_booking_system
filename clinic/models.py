@@ -16,6 +16,8 @@ class DoctorSchedule(models.Model):
             speciality = speciality + str(sp) + ', '
         return speciality + ' ' + self.doctor.first_name + ' ' + self.doctor.surname + ' ' + self.date.strftime("%Y-%m-%d") +' '+ self.time
 
+    def get_absolute_url(self):
+        return reverse("doctor_schedule_detail", kwargs={"pk": self.pk})
 
 class Visit(models.Model):
     patient = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
