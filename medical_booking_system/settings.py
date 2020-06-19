@@ -27,7 +27,9 @@ SECRET_KEY = 'djtdcbba2l-i-a5&-94!@=z(8-885s03wclx)9tij^f^xt-_v='
 DEBUG = False
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = ['*'] heroku
+
+# heroku
+ALLOWED_HOSTS = ['*'] 
 
 # Application definition
 
@@ -85,7 +87,7 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     # }
-    'default': dj_database_url.config('DATABASE_URL') heroku
+    'default': dj_database_url.config('DATABASE_URL') 
     
 }
 
