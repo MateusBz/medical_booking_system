@@ -29,7 +29,7 @@ class DoctorScheduleListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super(DoctorScheduleListView, self).get_queryset(*args, **kwargs)
-        qs = qs.filter(occupied =False)
+        qs = qs.filter(occupied=False)
         return qs
 
 
