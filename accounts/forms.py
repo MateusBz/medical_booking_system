@@ -11,7 +11,7 @@ class PatientSignUpForm(UserCreationForm):
     surname = forms.CharField(max_length=80, label='Nazwisko', min_length=4)
     email = forms.EmailField(label='Email', max_length=80, min_length=6)
     pesel_number = forms.CharField(label='Numer PESEL', widget=forms.TextInput(attrs={'pattern': '\d*', 'maxlength': 11}), min_length=11)
-    phone = PhoneNumberField(label='Telefon', max_length=15, min_length=10)
+    phone = PhoneNumberField(label='Telefon', max_length=15)
     day_of_birth = forms.DateField(
         label='Data Urodzenia', widget=forms.TextInput(attrs={'placeholder': 'yyyy-mm-dd'}),  error_messages={'invalid': 'Niepoprawna nazwa'})
     GENDER = (
@@ -21,8 +21,8 @@ class PatientSignUpForm(UserCreationForm):
     )
     gender = forms.ChoiceField(choices=GENDER, label='Płeć')
     street = forms.CharField(label='Ulica', max_length=80, min_length=4)
-    house_number = forms.CharField(label='Numer domu', max_length=10, min_length=4)
-    flat_number = forms.CharField(label='Numer mieszkania', required=False, max_length=10, min_length=4)
+    house_number = forms.CharField(label='Numer domu', max_length=10)
+    flat_number = forms.CharField(label='Numer mieszkania', required=False, max_length=10)
     zip_code = forms.CharField(label='Kod pocztowy', max_length=6, min_length=6)
     city = forms.CharField(label = 'Miasto', max_length=80, min_length=6)
 
@@ -70,7 +70,7 @@ class DoctorSignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=80, label='Imię', min_length=4)
     surname = forms.CharField(max_length=80, label='Nazwisko', min_length=4)
     email = forms.EmailField(label='Email', max_length=80, min_length=6)
-    phone = PhoneNumberField(label='Telefon', max_length=15, min_length=10)
+    phone = PhoneNumberField(label='Telefon', max_length=15)
     medical_licence = forms.CharField(label='PWZ', widget=forms.TextInput(
         attrs={'pattern': '\d*', 'maxlength': 7}), min_length=7)
     speciality = forms.ModelMultipleChoiceField(
