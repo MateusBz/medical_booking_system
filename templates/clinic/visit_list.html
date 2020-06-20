@@ -2,7 +2,7 @@
 
 {% block page_content %}
     {% if visits %}
-        {% for visit in visits %}
+        
             
         <table class="table" style="margin-top:2rem;">
             <thead>
@@ -11,24 +11,28 @@
                     <th scope="col">Godzina wizyty</th>
                     {% if user.is_patient %}
                     <th scope="col">Lekarz</th>
+                    <th scope="col"></th>
                     {% else %}
                     <th scope="col">Pacjent</th>
                     {% endif%}
                 </tr>
             </thead>
+        {% for visit in visits %}
             <tbody>
                 <tr>
                     <td>{{ visit.doctor.date }}</td>
                     <td>{{ visit.doctor.time }}</td>
                     {% if user.is_patient %}
                         <td>{{ visit.doctor.doctor}}</td>
+                        <td><a class="btn btn-danger" href="{% url 'visit_delete' pk=visit.id %}" role="button">Rezygnacja</a></td>
                     {% else %}
                         <td>{{ visit.patient.patient }}</td>
                     {% endif %}
                 </tr>
             </tbody>
-        </table>  
         {% endfor %}
+        </table>  
+       
     {% else %}
     <h3>Brak zaplanowanych wizyt.</h3>
     {% endif %}

@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, DetailView, ListView
-from django.shortcuts import redirect
+from django.views.generic import CreateView, DetailView, ListView, DeleteView
 from ..models import Visit
 from ..forms import VisitCreateForm
 
@@ -33,3 +32,15 @@ class PatientVisitListView(LoginRequiredMixin, ListView):
 class VisitDetailView(LoginRequiredMixin, DetailView):
     model = Visit
     template_name = 'clinic/visit_detail.html'
+
+
+class VisitDelete(DeleteView):
+    model = Visit
+    success_url = '/'
+    template_name = 'clinic/visit_delete.html'
+
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.doctor.occupied = False
+        self.object.doctor.save()
+        return super(VisitDelete, self).delete(*args, **kwargs)

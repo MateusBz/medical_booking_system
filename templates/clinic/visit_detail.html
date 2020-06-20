@@ -2,7 +2,12 @@
 
 {% block page_content %}
 
-    {{ object.patient}}
-    {{ object.doctor}}
+    <div>
+        <h4>Wizyta została zarezerwowana.</h4>
+        <p>Dane wizyty:</p>
+        <p>Data: {{ object.doctor.date }}</p>
+        <p>Godzina: {{ object.doctor.time }}</p>
+    </div>
+    
 
 {% endblock page_content %}
