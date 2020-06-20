@@ -46,4 +46,8 @@ class DoctorScheduleCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.doctor = self.request.user.doctor
+        form.instance.date.occupied = True
+        form.instance.time.occupied = True
+        form.instance.date.save()
+        form.instance.time.save()
         return super().form_valid(form)
