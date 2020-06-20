@@ -4,3 +4,4 @@ from .models import Visit, DoctorSchedule
 
 admin.site.register(Visit)
 admin.site.register(DoctorSchedule)
+
