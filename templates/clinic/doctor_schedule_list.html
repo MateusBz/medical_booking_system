@@ -2,17 +2,42 @@
 
 {% block page_content %}
     {% if dates_taken %}
-        <h2>Potwierdzone wizyty:</h2>
+    <div class="col-md-6 offset-md-1">
+        <div class="row" >
+            <h2 style="margin-bottom: 1rem;">Potwierdzone wizyty</h2>
+        </div>
+        
+       
         {% for visit in dates_taken %}
-            <p>Data; {{visit.date}}</p>
-            <p>Godzina; {{visit.time}}</p>
-            <hr>
+            <div class="row">
+                <div>
+                    <button class="btn btn-outline-primary disabled">Data: {{visit.date}}</button>
+            
+                    <button class='btn btn-outline-secondary disabled'> Godzina: {{visit.time}}</button>
+                </div>
+            
+            </div>
         {% endfor %}
+        
+        
     {% if free_dates %}
-        <h2>Terminy wolne:</h2>
+    <br><br>
+        <div class="row">
+            <h2 style="margin-bottom: 1rem;">Terminy wolne:</h2>
+        </div>
         {% for v in free_dates%}
-            <p>{{ v.date }} {{v.time}}</p>
+        <div class="row">
+            <div>
+                
+                <button class="btn btn-outline-primary disabled">Data: {{ v.date }}</button>
+            
+                <button class='btn btn-outline-secondary disabled'> Godzina: {{v.time}}</button>
+                
+            </div>
+        </div>
+        <br>
         {% endfor %}
+    </div>
     {% endif %}
     {% else %}
          <div class="col-md-6 offset-md-3" style="margin-top: 4rem;">
