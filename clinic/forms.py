@@ -6,7 +6,7 @@ from .models import Visit, DoctorSchedule, DoctorVisitDate, DoctorVisitTime
 class VisitCreateForm(forms.ModelForm):
 
     doctor = forms.ModelChoiceField(queryset=DoctorSchedule.objects.filter(
-        occupied=False), label='Wizyta')
+        occupied=False), label='Dostępne teminy wizyt')
 
     class Meta:
         model = Visit

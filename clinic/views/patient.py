@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, DeleteView
+from django.urls import reverse_lazy
 from ..models import Visit
 from ..forms import VisitCreateForm
 
@@ -36,7 +37,8 @@ class VisitDetailView(LoginRequiredMixin, DetailView):
 
 class VisitDelete(DeleteView):
     model = Visit
-    success_url = '/'
+    context_object_name = 'visit'
+    success_url = reverse_lazy('visits_list')
     template_name = 'clinic/visit_delete.html'
 
     def delete(self, *args, **kwargs):

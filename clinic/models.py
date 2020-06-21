@@ -37,7 +37,9 @@ class DoctorSchedule(models.Model):
         speciality = ''
         for sp in self.doctor.speciality.all():
             speciality = speciality + str(sp) + ', '
-        return speciality + ' ' + self.doctor.first_name + ' ' + self.doctor.surname +' '+ self.date.date.strftime("%d/%m/%Y")+' '+ self.time.time
+        return speciality + ' ' + self.doctor.first_name + ' ' \
+            + self.doctor.surname + ' ' + self.date.date.strftime("%d/%m/%Y")\
+            + ' ' + self.time.time
 
     def get_absolute_url(self):
         return reverse("doctor_schedule_detail", kwargs={"pk": self.pk})
@@ -46,8 +48,6 @@ class DoctorSchedule(models.Model):
 class Visit(models.Model):
     patient = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     doctor = models.OneToOneField(DoctorSchedule, on_delete=models.CASCADE)
-    
+
     def get_absolute_url(self):
         return reverse("visit_detail", kwargs={"pk": self.pk})
-    
-    
