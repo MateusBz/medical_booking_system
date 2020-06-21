@@ -2,12 +2,35 @@
 
 {% block page_content %}
 
-    <div>
+    <div class='text-center' style="margin-top: 2rem;">
         <h4>Wizyta została zarezerwowana.</h4>
-        <p>Dane wizyty:</p>
-        <p>Data: {{ object.doctor.date }}</p>
-        <p>Godzina: {{ object.doctor.time }}</p>
     </div>
-    
+    <table class="table" style="margin-top:2rem;">
+            <thead>
+                <tr>
+                    <th scope="col">Data wizyty</th>
+                    <th scope="col">Godzina wizyty</th>
+                    {% if user.is_patient %}
+                    <th scope="col">Lekarz</th>
+                    <th scope="col"></th>
+                    {% else %}
+                    <th scope="col">Pacjent</th>
+                    {% endif%}
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr>
+                    <td>{{ object.doctor.date }}</td>
+                    <td>{{ object.doctor.time }}</td>
+                    {% if user.is_patient %}
+                        <td>{{ object.doctor.doctor}}</td>
+                    {% else %}
+                        <td>{{ object.patient.patient }}</td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        
+        </table>  
 
 {% endblock page_content %}

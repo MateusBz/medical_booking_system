@@ -2,8 +2,6 @@
 
 {% block page_content %}
     {% if visits %}
-        
-            
         <table class="table" style="margin-top:2rem;">
             <thead>
                 <tr>
@@ -34,6 +32,10 @@
         </table>  
        
     {% else %}
-    <h3>Brak zaplanowanych wizyt.</h3>
+    <div class="col-md-6 offset-md-3" style="margin-top: 4rem;">
+        <button class="btn btn-block btn-info disabled btn-lg">Nie masz zaplanowanych wizyt.</button>
+        
+    </div>
+    
     {% endif %}
 {% endblock page_content%}

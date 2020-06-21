@@ -6,7 +6,7 @@ from .models import Visit, DoctorSchedule, DoctorVisitDate, DoctorVisitTime
 class VisitCreateForm(forms.ModelForm):
 
     doctor = forms.ModelChoiceField(queryset=DoctorSchedule.objects.filter(
-        occupied=False))
+        occupied=False), label='Wizyta')
 
     class Meta:
         model = Visit
@@ -16,10 +16,10 @@ class VisitCreateForm(forms.ModelForm):
 class DoctorScheduleCreateForm(forms.ModelForm):
 
     date = forms.ModelChoiceField(queryset=DoctorVisitDate.objects.filter(
-        occupied=False))
+        occupied=False), label='Data')
 
     time = forms.ModelChoiceField(queryset=DoctorVisitTime.objects.filter(
-        occupied=False))
+        occupied=False), label='Godzina')
 
     class Meta:
         model = DoctorSchedule

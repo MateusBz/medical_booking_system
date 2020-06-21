@@ -3,9 +3,15 @@
 {% load crispy_forms_tags %}
 
 {% block page_content %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit">Zapisz</button>
+<div class="row" style="margin-top: 2rem;">
+    <div class="col-md-6 offset-md-3">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button class="btn btn-success" type="submit">Zapisz</button>
+        </form>
+    </div>
+</div>
+    
 </form>
 {% endblock page_content %}

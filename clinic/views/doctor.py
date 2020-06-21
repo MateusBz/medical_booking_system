@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView
-from django.shortcuts import redirect, get_list_or_404
+from django.shortcuts import redirect, get_list_or_404, get_object_or_404
 from django.http import Http404
 from ..models import Visit, DoctorSchedule
 from ..forms import VisitCreateForm, DoctorScheduleCreateForm
@@ -8,19 +8,21 @@ from ..forms import VisitCreateForm, DoctorScheduleCreateForm
 
 class DoctorVisitListView(LoginRequiredMixin, ListView):
     model = Visit
-    context_object_name = 'visits'
-    template_name = 'clinic/visit_list.html'
+    context_object_name = 'dates_taken'
+    template_name = 'clinic/doctor_schedule_list.html'
     login_url = 'login'
 
     def get_queryset(self, *args, **kwargs):
         qs = super(DoctorVisitListView, self).get_queryset(*args, **kwargs)
-        try:
-            doctor = DoctorSchedule.objects.filter(
-                doctor=self.request.user.id)[:1]
-        except DoctorSchedule.DoesNotExist:
-            raise Http404('Brak danych')
-        qs = qs.filter(doctor=doctor)
+        qs = DoctorSchedule.objects.filter(doctor=self.request.user.id)
+        qs = qs.filter(occupied=True)
         return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['free_dates'] = DoctorSchedule.objects.filter(
+            doctor=self.request.user.id, occupied=False)
+        return context
 
 
 class DoctorScheduleListView(ListView):

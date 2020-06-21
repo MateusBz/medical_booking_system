@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    {% if dates_taken %}
+        <h2>Potwierdzone wizyty:</h2>
+        {% for visit in dates_taken %}
+            <p>Data; {{visit.date}}</p>
+            <p>Godzina; {{visit.time}}</p>
+            <hr>
+        {% endfor %}
+    {% if free_dates %}
+        <h2>Terminy wolne:</h2>
+        {% for v in free_dates%}
+            <p>{{ v.date }} {{v.time}}</p>
+        {% endfor %}
+    {% endif %}
+    {% else %}
+         <div class="col-md-6 offset-md-3" style="margin-top: 4rem;">
+            <button class="btn btn-block btn-info disabled btn-lg">Nie masz zaplanowanych wizyt.</button>
+        
+        </div>
+    {% endif%}
+    
+
+{% endblock page_content %}
