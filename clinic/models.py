@@ -1,18 +1,11 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from accounts.models import Doctor, Patient
+from accounts.models import Doctor
 
 
-class DoctorVisitDate(models.Model):
+class DoctorVisitDateTime(models.Model):
     date = models.DateField()
-    occupied = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.date.strftime("%d/%m/%Y")
-
-
-class DoctorVisitTime(models.Model):
     HOURS = (
         ('8:00', '8:00'),
         ('8:30', '8:30'),
@@ -24,13 +17,12 @@ class DoctorVisitTime(models.Model):
     occupied = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.time
+        return self.date.strftime("%d/%m/%Y") + ' ' + self.time
 
 
 class DoctorSchedule(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    date = models.ForeignKey(DoctorVisitDate, on_delete=models.CASCADE)
-    time = models.ForeignKey(DoctorVisitTime, on_delete=models.CASCADE)
+    date = models.ForeignKey(DoctorVisitDateTime, on_delete=models.CASCADE)
     occupied = models.BooleanField(default=False)
 
     def __str__(self):
@@ -39,7 +31,7 @@ class DoctorSchedule(models.Model):
             speciality = speciality + str(sp) + ', '
         return speciality + ' ' + self.doctor.first_name + ' ' \
             + self.doctor.surname + ' ' + self.date.date.strftime("%d/%m/%Y")\
-            + ' ' + self.time.time
+            +' ' + self.date.time
 
     def get_absolute_url(self):
         return reverse("doctor_schedule_detail", kwargs={"pk": self.pk})

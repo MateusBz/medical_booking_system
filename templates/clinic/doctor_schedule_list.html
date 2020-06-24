@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-    {% if dates_taken %}
+    
     <div class="col-md-6 offset-md-1">
+        
         <div class="row" >
             <h2 style="margin-bottom: 1rem;">Potwierdzone wizyty</h2>
         </div>
-        
+        {% if dates_taken %}
        
         {% for visit in dates_taken %}
             <div class="row">
                 <div>
                     <button class="btn btn-outline-primary disabled">Data: {{visit.date}}</button>
-            
-                    <button class='btn btn-outline-secondary disabled'> Godzina: {{visit.time}}</button>
                 </div>
-            
             </div>
         {% endfor %}
-        
-        
+    {% else %}
+        <div class="row">
+            <div>
+                <button class="btn btn-outline-primary disabled ">Brak potwierdzonych wizyt.</button>
+            </div>
+        </div>
+    {% endif %}
     {% if free_dates %}
     <br><br>
         <div class="row">
@@ -28,23 +31,17 @@
         {% for v in free_dates%}
         <div class="row">
             <div>
-                
                 <button class="btn btn-outline-primary disabled">Data: {{ v.date }}</button>
-            
-                <button class='btn btn-outline-secondary disabled'> Godzina: {{v.time}}</button>
-                
             </div>
         </div>
         <br>
         {% endfor %}
     </div>
-    {% endif %}
-    {% else %}
-         <div class="col-md-6 offset-md-3" style="margin-top: 4rem;">
-            <button class="btn btn-block btn-info disabled btn-lg">Nie masz zaplanowanych wizyt. Dodaj wolne terminy.</button>
-        
+     {% else %}
+        <div>
+            <button class="btn btn-outline-primary disabled ">Brak zaplanowanych wizyt.</button>
         </div>
-    {% endif%}
-    
+    {% endif %}
+  
 
 {% endblock page_content %}

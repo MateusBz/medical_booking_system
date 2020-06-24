@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Visit, DoctorSchedule, DoctorVisitDate, DoctorVisitTime
+from .models import Visit, DoctorSchedule, DoctorVisitDateTime
 
 
 class VisitCreateForm(forms.ModelForm):
@@ -15,12 +15,9 @@ class VisitCreateForm(forms.ModelForm):
 
 class DoctorScheduleCreateForm(forms.ModelForm):
 
-    date = forms.ModelChoiceField(queryset=DoctorVisitDate.objects.filter(
+    date = forms.ModelChoiceField(queryset=DoctorVisitDateTime.objects.filter(
         occupied=False), label='Data')
-
-    time = forms.ModelChoiceField(queryset=DoctorVisitTime.objects.filter(
-        occupied=False), label='Godzina')
 
     class Meta:
         model = DoctorSchedule
-        fields = ('date', 'time',)
+        fields = ('date',)

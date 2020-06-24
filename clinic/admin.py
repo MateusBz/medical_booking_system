@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Visit, DoctorSchedule, DoctorVisitDate, DoctorVisitTime
+from .models import Visit, DoctorSchedule, DoctorVisitDateTime
 
 
 admin.site.register(Visit)
 admin.site.register(DoctorSchedule)
-admin.site.register(DoctorVisitDate)
-admin.site.register(DoctorVisitTime)
+admin.site.register(DoctorVisitDateTime)
+

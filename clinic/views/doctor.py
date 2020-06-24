@@ -1,9 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView
-from django.shortcuts import redirect, get_list_or_404, get_object_or_404
-from django.http import Http404
 from ..models import Visit, DoctorSchedule
-from ..forms import VisitCreateForm, DoctorScheduleCreateForm
+from ..forms import DoctorScheduleCreateForm
 
 
 class DoctorVisitListView(LoginRequiredMixin, ListView):
@@ -50,7 +48,5 @@ class DoctorScheduleCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.doctor = self.request.user.doctor
         form.instance.date.occupied = True
-        form.instance.time.occupied = True
         form.instance.date.save()
-        form.instance.time.save()
         return super().form_valid(form)
