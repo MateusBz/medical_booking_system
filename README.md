@@ -47,10 +47,18 @@ pipenv install
 ```
 python manage.py migrate
 ```
-5. Run the application
+
+5. Create super user
+```
+python manage.py createsuperuser
+```
+6. Run the application
 ```
 python manage.py runserver
 ```
+7. Log in as superuser and add doctor visit date time
+
+8. Create patient and doctor account.
 
 ## Demo
 
