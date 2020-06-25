@@ -26,10 +26,35 @@ After authentication, you can choose the date of your visit from the available d
 
 ## Setup
 
+1. Clone repository
+```
+git clone https://github.com/MateusBz/medical_booking_system.git
+```
+2. Install pipenv if you don't have one
+```
+ pip install pipenv
+```
+3. Create a virtual environment
+```
+pipenv shell
+```
+4. Install dependencies
+
+```
+pipenv install
+```
+4.  Start migrations
+```
+python manage.py migrate
+```
+5. Run the application
+```
+python manage.py runserver
+```
 
 ## Demo
 
 https://mbs-mat.herokuapp.com/
 
-## Status
+
 
