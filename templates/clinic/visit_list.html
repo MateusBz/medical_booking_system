@@ -18,8 +18,8 @@
         {% for visit in visits %}
             <tbody>
                 <tr>
-                    <td>{{ visit.doctor.date }}</td>
-                    <td>{{ visit.doctor.time }}</td>
+                    <td>{{ visit.doctor.date.date }}</td>
+                    <td>{{ visit.doctor.date.time }}</td>
                     {% if user.is_patient %}
                         <td>{{ visit.doctor.doctor}}</td>
                         <td><a class="btn btn-danger" href="{% url 'visit_delete' pk=visit.id %}" role="button">Rezygnacja</a></td>

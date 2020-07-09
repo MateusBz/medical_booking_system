@@ -21,8 +21,8 @@
         
             <tbody>
                 <tr>
-                    <td>{{ object.doctor.date }}</td>
-                    <td>{{ object.doctor.time }}</td>
+                    <td>{{ object.doctor.date.date }}</td>
+                    <td>{{ object.doctor.date.time }}</td>
                     {% if user.is_patient %}
                         <td>{{ object.doctor.doctor}}</td>
                     {% else %}
