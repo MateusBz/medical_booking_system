@@ -64,5 +64,9 @@ python manage.py runserver
 
 https://mbs-mat.herokuapp.com/
 
+If you don't want to create a new account, you can use the test accounts:
+user: test_patient password: test_user
+user: test_doctor password: test_user
+
 
 
