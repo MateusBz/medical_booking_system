@@ -30,35 +30,37 @@ After authentication, you can choose the date of your visit from the available d
 ```
 git clone https://github.com/MateusBz/medical_booking_system.git
 ```
-2. Install pipenv if you don't have one
+2. Change .env.example to .env
+
+3. Install pipenv if you don't have one
 ```
  pip install pipenv
 ```
-3. Create a virtual environment
+4. Create a virtual environment
 ```
 pipenv shell
 ```
-4. Install dependencies
+5. Install dependencies
 
 ```
 pipenv install
 ```
-4.  Start migrations
+6.  Start migrations
 ```
 python manage.py migrate
 ```
 
-5. Create super user
+7. Create super user
 ```
 python manage.py createsuperuser
 ```
-6. Run the application
+8. Run the application
 ```
 python manage.py runserver
 ```
-7. Log in as superuser and add doctor visit date time
-
-8. Create patient and doctor account.
+9. Log in as superuser and add doctor visit date time.
+<br>
+10. Create patient and doctor account.
 
 ## Demo
 
