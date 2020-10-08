@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
+from decouple import config, Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,15 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'djtdcbba2l-i-a5&-94!@=z(8-885s03wclx)9tij^f^xt-_v='
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 
 # heroku
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv()) 
 
 # Application definition
 
@@ -82,12 +84,7 @@ WSGI_APPLICATION = 'medical_booking_system.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-    }
-    
-    
+    'default': dj_database_url.config(default = config('DATABASE_URL'))
 }
 
 
