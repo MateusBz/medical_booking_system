@@ -36,14 +36,14 @@ git clone https://github.com/MateusBz/medical_booking_system.git
 ```
  pip install pipenv
 ```
-4. Create a virtual environment
-```
-pipenv shell
-```
-5. Install dependencies
-
+4. Install dependencies
 ```
 pipenv install
+```
+5. Activate a virtual environment
+
+```
+pipenv shell
 ```
 6.  Start migrations
 ```
@@ -59,16 +59,16 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 9. Log in as superuser and add doctor visit date time.
-<br>
+
 10. Create patient and doctor account.
 
 ## Demo
 
 https://mbs-mat.herokuapp.com/
 
-<p>If you don't want to create a new account, you can use the test accounts:</p>
-<p>user: test_patient password: test_user</p>
-<p>user: test_doctor password: test_user</p>
+If you don't want to create a new account, you can use the test accounts:
+user: test_patient password: test_user
+user: test_doctor password: test_user
 
 
 
