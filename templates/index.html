@@ -6,6 +6,14 @@
         {% else %}
         Witaj lekarzu {{ user.username }}
         {% endif %}
+    {% else %}
+        <div class="row">
+            <div class="col-6 text-justyfy " id="index_content">
+                {% for item in info  %}
+                    <p>{{ item}}</p>
+                {% endfor %}
+            </div>
+        </div>
     {% endif %}
 
 {% endblock page_content %}
