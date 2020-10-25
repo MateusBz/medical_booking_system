@@ -2,9 +2,19 @@
 {% block page_content %}
     {% if request.user.is_authenticated %}
         {% if request.user.is_patient %}
-        Witaj pacjencie {{ user.username }}!
+        <div class="row">
+            <div class="col-6 text-justyfy " id="index_content">
+                 Witaj pacjencie {{ user.username }}!
+            </div>
+        </div>
+       
         {% else %}
-        Witaj lekarzu {{ user.username }}
+        <div class="row">
+            <div class="col-6 text-justyfy " id="index_content">
+                Witaj lekarzu {{ user.username }}
+            </div>
+        </div>
+        
         {% endif %}
     {% else %}
         <div class="row">
